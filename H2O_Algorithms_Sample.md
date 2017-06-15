@@ -180,66 +180,13 @@ glm_perf2
 # it is probably easier to print just the metric that you are interested in comparing.
 # Retreive test set AUC
 h2o.auc(glm_perf1)  #0.677449084114
-```
-
-    ## [1] 0.6774447
-
-``` r
 h2o.auc(glm_perf2)  #0.677675858276
-```
 
-    ## [1] 0.6772
-
-``` r
 # Compare test AUC to the training AUC and validation AUC
 h2o.auc(glm_fit2, train = TRUE)  #0.674306164325 
-```
-
-    ## [1] 0.6735941
-
-``` r
 h2o.auc(glm_fit2, valid = TRUE)  #0.675512216705
-```
-
-    ## [1] 0.6754209
-
-``` r
 glm_fit2@model$validation_metrics  #0.675512216705
 ```
-
-    ## H2OBinomialMetrics: glm
-    ## ** Reported on validation data. **
-    ## 
-    ## MSE:  0.1420118
-    ## RMSE:  0.3768446
-    ## LogLoss:  0.4510773
-    ## Mean Per-Class Error:  0.3702869
-    ## AUC:  0.6754209
-    ## Gini:  0.3508418
-    ## R^2:  0.05970267
-    ## Residual Deviance:  22100.99
-    ## AIC:  22200.99
-    ## 
-    ## Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
-    ##            0    1    Error         Rate
-    ## 0      13569 6387 0.320054  =6387/19956
-    ## 1       1910 2632 0.420520   =1910/4542
-    ## Totals 15479 9019 0.338681  =8297/24498
-    ## 
-    ## Maximum Metrics: Maximum metrics at their respective thresholds
-    ##                         metric threshold    value idx
-    ## 1                       max f1  0.192913 0.388172 216
-    ## 2                       max f2  0.116778 0.555145 312
-    ## 3                 max f0point5  0.288580 0.343075 133
-    ## 4                 max accuracy  0.487151 0.815209  29
-    ## 5                max precision  0.575981 0.695652   9
-    ## 6                   max recall  0.004354 1.000000 398
-    ## 7              max specificity  0.712974 0.999950   0
-    ## 8             max absolute_mcc  0.192913 0.209037 216
-    ## 9   max min_per_class_accuracy  0.180463 0.627581 232
-    ## 10 max mean_per_class_accuracy  0.192913 0.629713 216
-    ## 
-    ## Gains/Lift Table: Extract with `h2o.gainsLift(<model>, <data>)` or `h2o.gainsLift(<model>, valid=<T/F>, xval=<T/F>)`
 
 ``` r
 glm_fit2@model$standardized_coefficient_magnitudes # For Variable Impact
@@ -295,15 +242,81 @@ rf_perf1 <- h2o.performance(model = rf_fit1,
                             newdata = test)
 rf_perf2 <- h2o.performance(model = rf_fit2,
                             newdata = test)
+```
 
+``` r
 # Print model performance
 rf_perf1
-rf_perf2
+```
 
+    ## H2OBinomialMetrics: drf
+    ## 
+    ## MSE:  0.1438229
+    ## RMSE:  0.37924
+    ## LogLoss:  0.4569658
+    ## Mean Per-Class Error:  0.3802215
+    ## AUC:  0.6648373
+    ## Gini:  0.3296746
+    ## 
+    ## Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
+    ##            0     1    Error         Rate
+    ## 0      11984  8007 0.400530  =8007/19991
+    ## 1       1652  2938 0.359913   =1652/4590
+    ## Totals 13636 10945 0.392946  =9659/24581
+    ## 
+    ## Maximum Metrics: Maximum metrics at their respective thresholds
+    ##                         metric threshold    value idx
+    ## 1                       max f1  0.179535 0.378243 244
+    ## 2                       max f2  0.101166 0.550517 324
+    ## 3                 max f0point5  0.290318 0.340770 154
+    ## 4                 max accuracy  0.512740 0.813515  43
+    ## 5                max precision  0.742525 0.666667   2
+    ## 6                   max recall  0.007468 1.000000 396
+    ## 7              max specificity  0.798990 0.999950   0
+    ## 8             max absolute_mcc  0.222285 0.193695 206
+    ## 9   max min_per_class_accuracy  0.184768 0.616778 239
+    ## 10 max mean_per_class_accuracy  0.179535 0.619778 244
+    ## 
+    ## Gains/Lift Table: Extract with `h2o.gainsLift(<model>, <data>)` or `h2o.gainsLift(<model>, valid=<T/F>, xval=<T/F>)`
+
+``` r
+rf_perf2
+```
+
+    ## H2OBinomialMetrics: drf
+    ## 
+    ## MSE:  0.1429724
+    ## RMSE:  0.378117
+    ## LogLoss:  0.4538945
+    ## Mean Per-Class Error:  0.375031
+    ## AUC:  0.6701498
+    ## Gini:  0.3402997
+    ## 
+    ## Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
+    ##            0     1    Error         Rate
+    ## 0      12087  7904 0.395378  =7904/19991
+    ## 1       1628  2962 0.354684   =1628/4590
+    ## Totals 13715 10866 0.387779  =9532/24581
+    ## 
+    ## Maximum Metrics: Maximum metrics at their respective thresholds
+    ##                         metric threshold    value idx
+    ## 1                       max f1  0.180433 0.383282 240
+    ## 2                       max f2  0.107164 0.550293 316
+    ## 3                 max f0point5  0.297675 0.348490 141
+    ## 4                 max accuracy  0.567151 0.813637  20
+    ## 5                max precision  0.669570 0.625000   4
+    ## 6                   max recall  0.010919 1.000000 396
+    ## 7              max specificity  0.709810 0.999950   0
+    ## 8             max absolute_mcc  0.239435 0.203692 187
+    ## 9   max min_per_class_accuracy  0.185317 0.621680 235
+    ## 10 max mean_per_class_accuracy  0.180433 0.624969 240
+    ## 
+    ## Gains/Lift Table: Extract with `h2o.gainsLift(<model>, <data>)` or `h2o.gainsLift(<model>, valid=<T/F>, xval=<T/F>)`
+
+``` r
 # Retreive test set AUC
 h2o.auc(rf_perf1)  # 0.662266990734
 h2o.auc(rf_perf2)  # 0.66525468051
-
 
 # Cross-validate performance
 # Rather than using held-out test set to evaluate model performance, a user may wish 
@@ -323,14 +336,10 @@ rf_fit3 <- h2o.randomForest(x = x,
                             model_id = "rf_fit3",
                             seed = 1,
                             nfolds = 5)
-```
 
-``` r
 # To evaluate the cross-validated AUC, do the following:
 h2o.auc(rf_fit3, xval = TRUE)  # 0.6648373
 ```
-
-    ## [1] 0.6628227
 
 ``` r
 rf_fit3@model$variable_importances # For Feature Selection
@@ -520,21 +529,9 @@ gbm_perf3
 ``` r
 # Retreive test set AUC
 h2o.auc(gbm_perf1)  # 0.682765594191
-```
-
-    ## [1] 0.6838852
-
-``` r
 h2o.auc(gbm_perf2)  # 0.671854616713
-```
-
-    ## [1] 0.6840778
-
-``` r
 h2o.auc(gbm_perf3)  # 0.68309902855
 ```
-
-    ## [1] 0.6844529
 
 ``` r
 # To examine the scoring history, use the `scoring_history` method on a trained model.  
@@ -548,36 +545,57 @@ h2o.scoreHistory(gbm_fit2)
 ```
 
     ## Scoring History: 
-    ##             timestamp   duration number_of_trees training_rmse
-    ## 1 2017-06-15 22:20:19  0.016 sec               0       0.38563
-    ## 2 2017-06-15 22:20:19  0.095 sec               1       0.38370
-    ## 3 2017-06-15 22:20:19  0.188 sec               2       0.38206
-    ## 4 2017-06-15 22:20:20  0.317 sec               3       0.38069
-    ## 5 2017-06-15 22:20:20  0.431 sec               4       0.37954
-    ## 6 2017-06-15 22:20:20  0.624 sec               5       0.37853
-    ## 7 2017-06-15 22:20:20  0.952 sec               6       0.37763
-    ## 8 2017-06-15 22:20:22  2.521 sec               7       0.37685
-    ## 9 2017-06-15 22:20:32 13.168 sec             500       0.36129
-    ##   training_logloss training_auc training_lift
-    ## 1          0.47403      0.50000       1.00000
-    ## 2          0.46913      0.65779       2.68330
-    ## 3          0.46512      0.66583       2.79399
-    ## 4          0.46184      0.66851       2.97100
-    ## 5          0.45912      0.67012       2.97544
-    ## 6          0.45676      0.67364       3.04518
-    ## 7          0.45468      0.67522       3.10037
-    ## 8          0.45291      0.67677       3.15225
-    ## 9          0.41770      0.74023       4.25823
-    ##   training_classification_error
-    ## 1                       0.81825
-    ## 2                       0.40069
-    ## 3                       0.33325
-    ## 4                       0.34475
-    ## 5                       0.33180
-    ## 6                       0.32328
-    ## 7                       0.31221
-    ## 8                       0.32476
-    ## 9                       0.27845
+    ##              timestamp   duration number_of_trees training_rmse
+    ## 1  2017-06-15 22:34:40  0.016 sec               0       0.38563
+    ## 2  2017-06-15 22:34:40  0.088 sec               1       0.38370
+    ## 3  2017-06-15 22:34:40  0.163 sec               2       0.38206
+    ## 4  2017-06-15 22:34:40  0.272 sec               3       0.38069
+    ## 5  2017-06-15 22:34:40  0.397 sec               4       0.37954
+    ## 6  2017-06-15 22:34:41  0.597 sec               5       0.37853
+    ## 7  2017-06-15 22:34:41  0.906 sec               6       0.37763
+    ## 8  2017-06-15 22:34:41  1.282 sec               7       0.37685
+    ## 9  2017-06-15 22:34:42  1.647 sec               8       0.37618
+    ## 10 2017-06-15 22:34:42  2.015 sec               9       0.37558
+    ## 11 2017-06-15 22:34:42  2.394 sec              10       0.37508
+    ## 12 2017-06-15 22:34:43  2.799 sec              11       0.37461
+    ## 13 2017-06-15 22:34:43  3.234 sec              12       0.37415
+    ## 14 2017-06-15 22:34:44  3.672 sec              13       0.37377
+    ## 15 2017-06-15 22:34:48  8.497 sec             120       0.36213
+    ## 16 2017-06-15 22:34:54 14.450 sec             500       0.36129
+    ##    training_logloss training_auc training_lift
+    ## 1           0.47403      0.50000       1.00000
+    ## 2           0.46913      0.65779       2.68330
+    ## 3           0.46512      0.66583       2.79399
+    ## 4           0.46184      0.66851       2.97100
+    ## 5           0.45912      0.67012       2.97544
+    ## 6           0.45676      0.67364       3.04518
+    ## 7           0.45468      0.67522       3.10037
+    ## 8           0.45291      0.67677       3.15225
+    ## 9           0.45135      0.67855       3.18148
+    ## 10          0.44999      0.67973       3.17894
+    ## 11          0.44884      0.68115       3.19128
+    ## 12          0.44775      0.68240       3.23350
+    ## 13          0.44672      0.68340       3.25065
+    ## 14          0.44586      0.68423       3.27740
+    ## 15          0.41949      0.73651       4.14340
+    ## 16          0.41770      0.74023       4.25823
+    ##    training_classification_error
+    ## 1                        0.81825
+    ## 2                        0.40069
+    ## 3                        0.33325
+    ## 4                        0.34475
+    ## 5                        0.33180
+    ## 6                        0.32328
+    ## 7                        0.31221
+    ## 8                        0.32476
+    ## 9                        0.32558
+    ## 10                       0.32783
+    ## 11                       0.32204
+    ## 12                       0.32537
+    ## 13                       0.31838
+    ## 14                       0.32216
+    ## 15                       0.27964
+    ## 16                       0.27845
 
 ``` r
 # When early stopping is used, we see that training stopped at 105 trees instead of the full 500.  
@@ -590,26 +608,26 @@ h2o.scoreHistory(gbm_fit3)
 
     ## Scoring History: 
     ##              timestamp   duration number_of_trees training_rmse
-    ## 1  2017-06-15 22:20:38  0.025 sec               0       0.38563
-    ## 2  2017-06-15 22:20:38  0.282 sec               5       0.37853
-    ## 3  2017-06-15 22:20:38  0.861 sec              10       0.37508
-    ## 4  2017-06-15 22:20:39  1.614 sec              15       0.37307
-    ## 5  2017-06-15 22:20:40  2.392 sec              20       0.37152
-    ## 6  2017-06-15 22:20:41  3.204 sec              25       0.37041
-    ## 7  2017-06-15 22:20:42  4.173 sec              30       0.36947
-    ## 8  2017-06-15 22:20:43  5.240 sec              35       0.36877
-    ## 9  2017-06-15 22:20:44  6.404 sec              40       0.36808
-    ## 10 2017-06-15 22:20:45  7.670 sec              45       0.36748
-    ## 11 2017-06-15 22:20:47  8.990 sec              50       0.36699
-    ## 12 2017-06-15 22:20:48 10.372 sec              55       0.36651
-    ## 13 2017-06-15 22:20:49 11.891 sec              60       0.36607
-    ## 14 2017-06-15 22:20:51 13.438 sec              65       0.36574
-    ## 15 2017-06-15 22:20:53 15.100 sec              70       0.36531
-    ## 16 2017-06-15 22:20:54 16.875 sec              75       0.36503
-    ## 17 2017-06-15 22:20:56 18.673 sec              80       0.36460
-    ## 18 2017-06-15 22:20:58 20.590 sec              85       0.36426
-    ## 19 2017-06-15 22:21:00 22.584 sec              90       0.36394
-    ## 20 2017-06-15 22:21:02 24.912 sec              95       0.36362
+    ## 1  2017-06-15 22:34:59  0.016 sec               0       0.38563
+    ## 2  2017-06-15 22:35:00  0.250 sec               5       0.37853
+    ## 3  2017-06-15 22:35:00  0.739 sec              10       0.37508
+    ## 4  2017-06-15 22:35:01  1.471 sec              15       0.37307
+    ## 5  2017-06-15 22:35:02  2.360 sec              20       0.37152
+    ## 6  2017-06-15 22:35:03  3.268 sec              25       0.37041
+    ## 7  2017-06-15 22:35:04  4.227 sec              30       0.36947
+    ## 8  2017-06-15 22:35:05  5.337 sec              35       0.36877
+    ## 9  2017-06-15 22:35:06  6.518 sec              40       0.36808
+    ## 10 2017-06-15 22:35:07  7.742 sec              45       0.36748
+    ## 11 2017-06-15 22:35:08  9.072 sec              50       0.36699
+    ## 12 2017-06-15 22:35:10 10.481 sec              55       0.36651
+    ## 13 2017-06-15 22:35:11 12.035 sec              60       0.36607
+    ## 14 2017-06-15 22:35:13 13.789 sec              65       0.36574
+    ## 15 2017-06-15 22:35:15 15.473 sec              70       0.36531
+    ## 16 2017-06-15 22:35:17 17.302 sec              75       0.36503
+    ## 17 2017-06-15 22:35:19 19.166 sec              80       0.36460
+    ## 18 2017-06-15 22:35:21 21.134 sec              85       0.36426
+    ## 19 2017-06-15 22:35:23 23.290 sec              90       0.36394
+    ## 20 2017-06-15 22:35:25 25.442 sec              95       0.36362
     ##    training_logloss training_auc training_lift
     ## 1           0.47403      0.50000       1.00000
     ## 2           0.45676      0.67364       3.04518
@@ -681,7 +699,7 @@ plot(gbm_fit3,
      metric = "AUC")
 ```
 
-![](H2O_Algorithms_Sample_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](H2O_Algorithms_Sample_files/figure-markdown_github/unnamed-chunk-14-1.png)
 
 ``` r
 plot(gbm_fit3, 
@@ -689,7 +707,7 @@ plot(gbm_fit3,
      metric = "logloss")
 ```
 
-![](H2O_Algorithms_Sample_files/figure-markdown_github/unnamed-chunk-8-2.png)
+![](H2O_Algorithms_Sample_files/figure-markdown_github/unnamed-chunk-14-2.png)
 
 ``` r
 gbm_fit3@model$variable_importances # For Feature Selection
@@ -781,31 +799,31 @@ dl_perf1
 
     ## H2OBinomialMetrics: deeplearning
     ## 
-    ## MSE:  0.142546
-    ## RMSE:  0.3775526
-    ## LogLoss:  0.4552094
-    ## Mean Per-Class Error:  0.3709013
-    ## AUC:  0.6796901
-    ## Gini:  0.3593803
+    ## MSE:  0.1421882
+    ## RMSE:  0.3770785
+    ## LogLoss:  0.4514089
+    ## Mean Per-Class Error:  0.3697886
+    ## AUC:  0.6816044
+    ## Gini:  0.3632087
     ## 
     ## Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
     ##            0    1    Error         Rate
-    ## 0      13219 6772 0.338752  =6772/19991
-    ## 1       1850 2740 0.403050   =1850/4590
-    ## Totals 15069 9512 0.350759  =8622/24581
+    ## 0      13233 6758 0.338052  =6758/19991
+    ## 1       1843 2747 0.401525   =1843/4590
+    ## Totals 15076 9505 0.349904  =8601/24581
     ## 
     ## Maximum Metrics: Maximum metrics at their respective thresholds
     ##                         metric threshold    value idx
-    ## 1                       max f1  0.164238 0.388597 235
-    ## 2                       max f2  0.083170 0.554917 320
-    ## 3                 max f0point5  0.265448 0.365728 149
-    ## 4                 max accuracy  0.456169 0.814247  46
-    ## 5                max precision  0.833140 1.000000   0
-    ## 6                   max recall  0.001221 1.000000 399
-    ## 7              max specificity  0.833140 1.000000   0
-    ## 8             max absolute_mcc  0.206894 0.215528 198
-    ## 9   max min_per_class_accuracy  0.155053 0.628540 244
-    ## 10 max mean_per_class_accuracy  0.151318 0.630075 248
+    ## 1                       max f1  0.173735 0.389784 246
+    ## 2                       max f2  0.084975 0.558545 334
+    ## 3                 max f0point5  0.299491 0.358091 154
+    ## 4                 max accuracy  0.552263 0.814328  46
+    ## 5                max precision  0.940880 1.000000   0
+    ## 6                   max recall  0.002112 1.000000 399
+    ## 7              max specificity  0.940880 1.000000   0
+    ## 8             max absolute_mcc  0.232568 0.216050 199
+    ## 9   max min_per_class_accuracy  0.164076 0.627887 254
+    ## 10 max mean_per_class_accuracy  0.159129 0.630575 258
     ## 
     ## Gains/Lift Table: Extract with `h2o.gainsLift(<model>, <data>)` or `h2o.gainsLift(<model>, valid=<T/F>, xval=<T/F>)`
 
@@ -815,31 +833,31 @@ dl_perf2
 
     ## H2OBinomialMetrics: deeplearning
     ## 
-    ## MSE:  0.1416375
-    ## RMSE:  0.3763476
-    ## LogLoss:  0.4489626
-    ## Mean Per-Class Error:  0.3665761
-    ## AUC:  0.682288
-    ## Gini:  0.3645759
+    ## MSE:  0.1417353
+    ## RMSE:  0.3764775
+    ## LogLoss:  0.4494173
+    ## Mean Per-Class Error:  0.369485
+    ## AUC:  0.6811269
+    ## Gini:  0.3622539
     ## 
     ## Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
     ##            0    1    Error         Rate
-    ## 0      12878 7113 0.355810  =7113/19991
-    ## 1       1732 2858 0.377342   =1732/4590
-    ## Totals 14610 9971 0.359831  =8845/24581
+    ## 0      13746 6245 0.312391  =6245/19991
+    ## 1       1958 2632 0.426580   =1958/4590
+    ## Totals 15704 8877 0.333713  =8203/24581
     ## 
     ## Maximum Metrics: Maximum metrics at their respective thresholds
     ##                         metric threshold    value idx
-    ## 1                       max f1  0.183806 0.392555 234
-    ## 2                       max f2  0.110261 0.559965 315
-    ## 3                 max f0point5  0.292138 0.358759 142
-    ## 4                 max accuracy  0.470974 0.814206  40
-    ## 5                max precision  0.646541 0.833333   1
-    ## 6                   max recall  0.018289 1.000000 396
-    ## 7              max specificity  0.656758 0.999950   0
-    ## 8             max absolute_mcc  0.185787 0.211955 232
-    ## 9   max min_per_class_accuracy  0.181018 0.632435 237
-    ## 10 max mean_per_class_accuracy  0.174392 0.634272 244
+    ## 1                       max f1  0.211799 0.390881 218
+    ## 2                       max f2  0.108229 0.559789 315
+    ## 3                 max f0point5  0.306350 0.357650 141
+    ## 4                 max accuracy  0.508081 0.814979  36
+    ## 5                max precision  0.699148 1.000000   0
+    ## 6                   max recall  0.021652 1.000000 395
+    ## 7              max specificity  0.699148 1.000000   0
+    ## 8             max absolute_mcc  0.223705 0.213600 208
+    ## 9   max min_per_class_accuracy  0.192619 0.627887 235
+    ## 10 max mean_per_class_accuracy  0.198257 0.631046 230
     ## 
     ## Gains/Lift Table: Extract with `h2o.gainsLift(<model>, <data>)` or `h2o.gainsLift(<model>, valid=<T/F>, xval=<T/F>)`
 
@@ -849,52 +867,40 @@ dl_perf3
 
     ## H2OBinomialMetrics: deeplearning
     ## 
-    ## MSE:  0.1427185
-    ## RMSE:  0.377781
-    ## LogLoss:  0.4519308
-    ## Mean Per-Class Error:  0.3675853
-    ## AUC:  0.6806951
-    ## Gini:  0.3613903
+    ## MSE:  0.1435531
+    ## RMSE:  0.378884
+    ## LogLoss:  0.4545534
+    ## Mean Per-Class Error:  0.3718431
+    ## AUC:  0.6785628
+    ## Gini:  0.3571256
     ## 
     ## Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
     ##            0    1    Error         Rate
-    ## 0      13369 6622 0.331249  =6622/19991
-    ## 1       1854 2736 0.403922   =1854/4590
-    ## Totals 15223 9358 0.344819  =8476/24581
+    ## 0      12981 7010 0.350658  =7010/19991
+    ## 1       1804 2786 0.393028   =1804/4590
+    ## Totals 14785 9796 0.358570  =8814/24581
     ## 
     ## Maximum Metrics: Maximum metrics at their respective thresholds
     ##                         metric threshold    value idx
-    ## 1                       max f1  0.227869 0.392314 212
-    ## 2                       max f2  0.121681 0.556670 313
-    ## 3                 max f0point5  0.340345 0.352367 125
-    ## 4                 max accuracy  0.495033 0.814084  35
-    ## 5                max precision  0.710965 1.000000   0
-    ## 6                   max recall  0.010086 1.000000 397
-    ## 7              max specificity  0.710965 1.000000   0
-    ## 8             max absolute_mcc  0.227869 0.212544 212
-    ## 9   max min_per_class_accuracy  0.214769 0.630184 224
-    ## 10 max mean_per_class_accuracy  0.227869 0.632415 212
+    ## 1                       max f1  0.235974 0.387321 213
+    ## 2                       max f2  0.143409 0.558196 301
+    ## 3                 max f0point5  0.350829 0.353725 122
+    ## 4                 max accuracy  0.528201 0.814410  32
+    ## 5                max precision  0.721328 1.000000   0
+    ## 6                   max recall  0.011857 1.000000 397
+    ## 7              max specificity  0.721328 1.000000   0
+    ## 8             max absolute_mcc  0.270495 0.208754 184
+    ## 9   max min_per_class_accuracy  0.228688 0.627669 219
+    ## 10 max mean_per_class_accuracy  0.228688 0.628326 219
     ## 
     ## Gains/Lift Table: Extract with `h2o.gainsLift(<model>, <data>)` or `h2o.gainsLift(<model>, valid=<T/F>, xval=<T/F>)`
 
 ``` r
 # Retreive test set AUC
 h2o.auc(dl_perf1)  # 0.6774335
-```
-
-    ## [1] 0.6796901
-
-``` r
 h2o.auc(dl_perf2)  # 0.678446
-```
-
-    ## [1] 0.682288
-
-``` r
 h2o.auc(dl_perf3)  # 0.6770498
 ```
-
-    ## [1] 0.6806951
 
 ``` r
 # Scoring history
@@ -903,29 +909,37 @@ h2o.scoreHistory(dl_fit3)
 
     ## Scoring History: 
     ##             timestamp   duration training_speed   epochs iterations
-    ## 1 2017-06-15 22:21:59  0.000 sec                 0.00000          0
-    ## 2 2017-06-15 22:21:59  0.460 sec 319683 obs/sec  0.87079          1
-    ## 3 2017-06-15 22:22:01  1.816 sec 388525 obs/sec  5.22056          6
-    ## 4 2017-06-15 22:22:02  3.250 sec 406418 obs/sec  9.57086         11
-    ## 5 2017-06-15 22:22:05  6.000 sec 431441 obs/sec 20.01613         23
+    ## 1 2017-06-15 22:36:24  0.000 sec                 0.00000          0
+    ## 2 2017-06-15 22:36:24  0.642 sec 239380 obs/sec  0.87079          1
+    ## 3 2017-06-15 22:36:26  2.414 sec 342046 obs/sec  6.09033          7
+    ## 4 2017-06-15 22:36:28  3.960 sec 377474 obs/sec 11.31360         13
+    ## 5 2017-06-15 22:36:29  5.647 sec 400746 obs/sec 17.40633         20
+    ## 6 2017-06-15 22:36:30  6.413 sec 408600 obs/sec 20.01613         23
+    ## 7 2017-06-15 22:36:30  6.544 sec 408600 obs/sec 20.01613         23
     ##          samples training_rmse training_logloss training_auc training_lift
     ## 1       0.000000                                                          
-    ## 2  100061.000000       0.38166          0.46239      0.65465       2.55820
-    ## 3  599884.000000       0.38365          0.46479      0.66714       2.44934
-    ## 4 1099768.000000       0.37853          0.45346      0.67222       2.99364
-    ## 5 2300014.000000       0.37773          0.45164      0.67891       2.72149
+    ## 2  100061.000000       0.38263          0.46733      0.66388       2.61263
+    ## 3  699828.000000       0.38197          0.46067      0.66294       2.39491
+    ## 4 1300023.000000       0.37905          0.45504      0.67542       2.83035
+    ## 5 2000127.000000       0.37737          0.45252      0.67729       3.10250
+    ## 6 2300014.000000       0.37689          0.45126      0.67445       2.88478
+    ## 7 2300014.000000       0.37905          0.45504      0.67542       2.83035
     ##   training_classification_error validation_rmse validation_logloss
     ## 1                                                                 
-    ## 2                       0.37419         0.38086            0.45980
-    ## 3                       0.31705         0.38283            0.46334
-    ## 4                       0.36256         0.37806            0.45300
-    ## 5                       0.31361         0.37791            0.45259
+    ## 2                       0.38380         0.38234            0.46609
+    ## 3                       0.40655         0.38123            0.45922
+    ## 4                       0.40494         0.37875            0.45470
+    ## 5                       0.33556         0.37779            0.45353
+    ## 6                       0.37257         0.37705            0.45191
+    ## 7                       0.40494         0.37875            0.45470
     ##   validation_auc validation_lift validation_classification_error
     ## 1                                                               
-    ## 2        0.66244         2.26754                         0.40452
-    ## 3        0.67149         2.39963                         0.39828
-    ## 4        0.67404         2.61978                         0.33995
-    ## 5        0.67727         2.31157                         0.34064
+    ## 2        0.66803         2.39963                         0.35166
+    ## 3        0.66611         2.50970                         0.34774
+    ## 4        0.67688         2.37761                         0.35472
+    ## 5        0.67542         2.68582                         0.38019
+    ## 6        0.67393         2.70784                         0.38366
+    ## 7        0.67688         2.37761                         0.35472
 
 ``` r
 # Look at scoring history for third DL model
@@ -934,7 +948,7 @@ plot(dl_fit3,
      metric = "AUC")
 ```
 
-![](H2O_Algorithms_Sample_files/figure-markdown_github/unnamed-chunk-10-1.png)
+![](H2O_Algorithms_Sample_files/figure-markdown_github/unnamed-chunk-18-1.png)
 
 ``` r
 dl_fit3@model$variable_importances # For Feature Selection
@@ -942,22 +956,22 @@ dl_fit3@model$variable_importances # For Feature Selection
 
     ## Variable Importances: 
     ##                 variable relative_importance scaled_importance percentage
-    ## 1            delinq_2yrs            1.000000          1.000000   0.037298
-    ## 2             annual_inc            0.992865          0.992865   0.037032
-    ## 3 purpose.small_business            0.658849          0.658849   0.024574
-    ## 4         term.36 months            0.638594          0.638594   0.023819
-    ## 5    purpose.credit_card            0.553831          0.553831   0.020657
+    ## 1             annual_inc            1.000000          1.000000   0.034903
+    ## 2         term.36 months            0.756012          0.756012   0.026387
+    ## 3            delinq_2yrs            0.748874          0.748874   0.026138
+    ## 4         term.60 months            0.631484          0.631484   0.022040
+    ## 5 purpose.small_business            0.630800          0.630800   0.022017
     ## 
     ## ---
     ##                           variable relative_importance scaled_importance
-    ## 82                   addr_state.HI            0.140110          0.140110
+    ## 82                   addr_state.AZ            0.115331          0.115331
     ## 83          addr_state.missing(NA)            0.000000          0.000000
     ## 84             purpose.missing(NA)            0.000000          0.000000
     ## 85      home_ownership.missing(NA)            0.000000          0.000000
     ## 86                term.missing(NA)            0.000000          0.000000
     ## 87 verification_status.missing(NA)            0.000000          0.000000
     ##    percentage
-    ## 82   0.005226
+    ## 82   0.004025
     ## 83   0.000000
     ## 84   0.000000
     ## 85   0.000000
@@ -1066,12 +1080,5 @@ nb_perf2
 ``` r
 # Retreive test set AUC
 h2o.auc(nb_perf1)  # 0.6488014
-```
-
-    ## [1] 0.6513648
-
-``` r
 h2o.auc(nb_perf2)  # 0.6490678
 ```
-
-    ## [1] 0.6514341
